@@ -102,13 +102,9 @@ public class MainActivity extends AppCompatActivity{
 
         // Highlight the selected item, update the title, and close the drawer
         menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
-        Log.d("dd", "catch");
-
         onBackPressed();
     }
 }
