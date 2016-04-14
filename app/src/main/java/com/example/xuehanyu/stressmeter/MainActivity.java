@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity{
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment = new chartFragment();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
     @Override
