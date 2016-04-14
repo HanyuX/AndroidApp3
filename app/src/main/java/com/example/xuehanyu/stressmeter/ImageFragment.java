@@ -55,6 +55,7 @@ public class ImageFragment extends Fragment {
             public void onClick(View v) {
                 mImage = getImageList();
                 gridView.setAdapter(new ImageAdapter(getActivity()));
+                ((MainActivity)getActivity()).onStop();
             }
         });
 
@@ -72,8 +73,6 @@ public class ImageFragment extends Fragment {
     }
 
 
-
-
     public List<Integer> getImageList() {
         List<Integer> all = new ArrayList<Integer>();
         Field[] fields = R.drawable.class.getFields();
@@ -87,7 +86,6 @@ public class ImageFragment extends Fragment {
             return null;
         }
 
-        Log.d("a", all.size() + "");
         Random random = new Random();
         List<Integer> mImage = new ArrayList<Integer>();
         Set<Integer> set = new HashSet<Integer>();

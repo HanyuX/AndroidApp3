@@ -37,9 +37,9 @@ public class ShowImageActivity extends AppCompatActivity {
 
     public void writeCSV(String filename, long time, int stress) {
         try {
-            OutputStream fout = openFileOutput(filename, MODE_PRIVATE);
+            OutputStream fout = openFileOutput(filename, MODE_APPEND);
             OutputStreamWriter bw = new OutputStreamWriter(fout);
-            bw.write(time + "," + stress);
+            bw.write(time + "," + stress + "\r\n");
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
