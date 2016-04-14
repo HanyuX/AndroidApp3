@@ -32,11 +32,14 @@ import java.util.Set;
  */
 public class ImageFragment extends Fragment {
 
-    private static final String TAG = "image_uri";
+    private static final String TAG = "image_uri";    //mark for the image
+    private static final String TAG1 = "position";    //mark for the position
 
-    private GridView gridView;
-    private Button button;
-    private List<Integer> mImage;
+    private GridView gridView;               //Define the grid view as the container of the image
+    private Button button;                   //The button for the image
+    private List<Integer> mImage;            //list of the image showing in the app
+    private int index = 0;                   //the index of the image series
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,70 +49,63 @@ public class ImageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_image, container, false);
 
         gridView = (GridView) rootView.findViewById(R.id.gridview);
-        mImage = getImageList();
+        mImage = getImageList(index);
+        index++;
         gridView.setAdapter(new ImageAdapter(getActivity()));
 
+
+        //change the grid view when the button is clicked
         button = (Button) rootView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mImage = getImageList();
+                mImage = getImageList(index);
+                index++;
                 gridView.setAdapter(new ImageAdapter(getActivity()));
             }
         });
 
+        //send the selected image to the next activity when more images button is clicked
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ShowImageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(TAG, mImage.get(position));
+                bundle.putInt(TAG1, position);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
         return rootView;
     }
-
-
-
-
-    public List<Integer> getImageList() {
-        List<Integer> all = new ArrayList<Integer>();
-        Field[] fields = R.drawable.class.getFields();
-        try {
-            for (Field field : fields) {
-                if (field.getName().startsWith("psm"))
-                    all.add(field.getInt(R.drawable.class));
-            }
-        }
-        catch (IllegalAccessException e) {
-            return null;
-        }
-
-        Log.d("a", all.size() + "");
-        Random random = new Random();
+    /*
+     * get the image list according to the index
+     */
+    public List<Integer> getImageList(int index) {
         List<Integer> mImage = new ArrayList<Integer>();
-        Set<Integer> set = new HashSet<Integer>();
-        for (int i = 0; i < 16; i++) {
-            int index = random.nextInt(all.size());
-            if (set.contains(index)) {
-                i--;
-                continue;
-            }
-            else {
-                set.add(index);
-                mImage.add(all.get(index));
-            }
+        int id = index % 3 + 1;
+
+        //calling the getGridById to get the result
+        int []res = PSM.getGridById(id);
+        for (int i = 0; i < res.length; i++) {
+            mImage.add(res[i]);
         }
         return mImage;
     }
 
+    /*
+     * define the adapter for the grid view
+     */
     class ImageAdapter extends BaseAdapter {
         Context context;
         public ImageAdapter(Context context) {
             this.context = context;
         }
+
+        /*
+         * return the number of the images
+         */
         @Override
         public int getCount() {
             return mImage.size();
@@ -125,6 +121,9 @@ public class ImageFragment extends Fragment {
             return position;
         }
 
+        /*
+         * return the image view
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView;
@@ -132,7 +131,6 @@ public class ImageFragment extends Fragment {
                 imageView = new ImageView(context);
                 imageView.setLayoutParams(new GridView.LayoutParams(400, 400));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
                 imageView.setPadding(0, 0, 0, 0);
             }
             else {

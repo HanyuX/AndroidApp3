@@ -2,20 +2,20 @@ package com.example.xuehanyu.stressmeter;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity{
     private Fragment fragment;
-
+    private static final int  EXIT_APPLICATION = 0x0001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +32,20 @@ public class MainActivity extends AppCompatActivity{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
 
-        fragment = new ImageFragment();
+        fragment = new chartFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
     }
 
+    protected void onStart() {
+        int flag = getIntent().getIntExtra("flag", 0);
+        if(flag == EXIT_APPLICATION) {
+            finish();
+        }
+        super.onResume();
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
