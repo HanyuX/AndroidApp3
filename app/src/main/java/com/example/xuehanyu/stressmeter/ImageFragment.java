@@ -134,7 +134,6 @@ public class ImageFragment extends Fragment {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
                 imageView.setPadding(0, 0, 0, 0);
-//                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             }
             else {
                 imageView = (ImageView) convertView;
