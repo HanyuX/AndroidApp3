@@ -62,6 +62,7 @@ public class ImageFragment extends Fragment {
                 mImage = getImageList(index);
                 index++;
                 gridView.setAdapter(new ImageAdapter(getActivity()));
+                ((MainActivity)getActivity()).onStop();
             }
         });
 
