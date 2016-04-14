@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity{
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
+
+        fragment = new ImageFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
     @Override
@@ -81,7 +85,8 @@ public class MainActivity extends AppCompatActivity{
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             default:
-            fragmentClass = chartFragment.class;
+//            fragmentClass = chartFragment.class;
+                fragmentClass = ImageFragment.class;
             break;
         }
 
@@ -114,19 +119,19 @@ public class MainActivity extends AppCompatActivity{
         int id = item.getItemId();
 
         Class fragmentClass;
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
         return true;
     }
 }
