@@ -57,10 +57,12 @@ public class MainActivity extends AppCompatActivity{
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
     }
+
     protected void onStart() {
         int flag = getIntent().getIntExtra("flag", 0);
-        if(flag ==
-                EXIT_APPLICATION) {
+        if(flag == EXIT_APPLICATION) {
+            vibrator.cancel();
+            mediaPlayer.stop();
             finish();
         }
         super.onResume();

@@ -48,12 +48,11 @@ public class ShowImageActivity extends AppCompatActivity {
     public void onEntrySubmitClicked(View view) {
         int stress = indexToStress[index];
         writeCSV("stress_timestamp.csv", System.currentTimeMillis(), stress);
-//        Intent mIntent = new Intent();
-//        mIntent.setClass(this, MainActivity.class);
-//        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        mIntent.putExtra("flag", EXIT_APPLICATION);
-//        startActivity(mIntent);
-        android.os.Process.killProcess(android.os.Process.myPid());
+        Intent mIntent = new Intent();
+        mIntent.setClass(this, MainActivity.class);
+        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mIntent.putExtra("flag", EXIT_APPLICATION);
+        startActivity(mIntent);
     }
 
     /*
