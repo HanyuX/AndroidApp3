@@ -1,7 +1,9 @@
 package com.example.xuehanyu.stressmeter;
 
+import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +95,7 @@ public class chartFragment extends Fragment {
         v.bottom = 0;
         v.top = maxValue+1;
         v.left = 0;
-        v.right = numberOfPoints-1;
+        v.right = numberOfPoints == 0 ? 0 : numberOfPoints-1;
         chart.setMaximumViewport(v);
         chart.setCurrentViewport(v);
     }
@@ -118,6 +120,11 @@ public class chartFragment extends Fragment {
         int colorEvenRows = getResources().getColor(android.R.color.white);
         int colorOddRows = getResources().getColor(android.R.color.darker_gray);
         tableView.setDataRowColoriser(TableDataRowColorizers.alternatingRows(colorEvenRows, colorOddRows));
+
+        //Set height of the table
+        android.widget.TableLayout.LayoutParams params = new  android.widget.TableLayout.LayoutParams();
+        params.height = 150+92*numberOfPoints;
+        tableView.setLayoutParams(params);
     }
 }
 
