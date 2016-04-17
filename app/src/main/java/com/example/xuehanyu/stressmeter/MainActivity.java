@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity{
 
         //set sound and start
         try {
-            mediaPlayer = MediaPlayer.create(this, R.raw.sound);
+            mediaPlayer = MediaPlayer.create(this, R.raw.bgm);
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
-        }catch(Exception exc){}
+        }catch(Exception exc){
+            exc.printStackTrace();
+        }
 
         //set alarm
         PSMScheduler vibratorScheduler = new PSMScheduler();
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    protected void onStart() {
+    protected void onResume() {
         int flag = getIntent().getIntExtra("flag", 0);
         if(flag == EXIT_APPLICATION) {
             vibrator.cancel();
@@ -84,7 +86,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    //set up the drawer menu and clicker
+    /*
+     * set up the drawer menu and clicker
+     */
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /*
-     *  One item in navigation bar is selected
+     *  When item in navigation bar is selected
      */
     public void selectDrawerItem(MenuItem menuItem) {
         vibrator.cancel();

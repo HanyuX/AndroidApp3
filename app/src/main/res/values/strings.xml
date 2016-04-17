@@ -10,7 +10,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="image_text">Touch the image that best captures how stressed you feel right now</string>
+    <string name="image_text">Touch the image that best captures\n how stressed you feel right now</string>
     <string name="image_more">MORE IMAGES</string>
 
     <!-- TODO: Remove or change this placeholder text -->

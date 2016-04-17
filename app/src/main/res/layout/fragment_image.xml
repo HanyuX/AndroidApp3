@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:padding="10dp"
+        android:gravity="center_horizontal"
         android:text="@string/image_text"/>
 
     <GridView
