@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +13,10 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ImageFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ImageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ImageFragment extends Fragment {
 
     private static final String TAG = "image_uri";    //mark for the image
@@ -40,6 +27,10 @@ public class ImageFragment extends Fragment {
     private List<Integer> mImage;            //list of the image showing in the app
     private int index = 0;                   //the index of the image series
 
+
+    /*
+     * Called when the fragment view is created
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,10 +50,10 @@ public class ImageFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).stopMedia();
                 mImage = getImageList(index);
                 index++;
                 gridView.setAdapter(new ImageAdapter(getActivity()));
-                ((MainActivity)getActivity()).onStop();
             }
         });
 
@@ -70,6 +61,7 @@ public class ImageFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MainActivity)getActivity()).stopMedia();
                 Intent intent = new Intent(getActivity(), ShowImageActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(TAG, mImage.get(position));
@@ -80,6 +72,7 @@ public class ImageFragment extends Fragment {
         });
         return rootView;
     }
+
     /*
      * get the image list according to the index
      */
@@ -112,11 +105,17 @@ public class ImageFragment extends Fragment {
             return mImage.size();
         }
 
+        /*
+         * return the item object;
+         */
         @Override
         public Object getItem(int position) {
             return position;
         }
 
+        /*
+         * return the id of the selected item
+         */
         @Override
         public long getItemId(int position) {
             return position;

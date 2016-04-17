@@ -44,7 +44,6 @@ public class ShowImageActivity extends AppCompatActivity {
     /*
      * Called when the submit button is clicked
      */
-
     public void onEntrySubmitClicked(View view) {
         int stress = indexToStress[index];
         writeCSV("stress_timestamp.csv", System.currentTimeMillis(), stress);

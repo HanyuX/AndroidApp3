@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity{
     private MediaPlayer mediaPlayer; //sound
     private static final int EXIT_APPLICATION = 0x0001;    //mark for finishing the application
 
+    /*
+     * Called when the activity is created
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +63,13 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    /*
+     * Called when the activity is created
+     */
     protected void onResume() {
         int flag = getIntent().getIntExtra("flag", 0);
         if(flag == EXIT_APPLICATION) {
-            vibrator.cancel();
-            mediaPlayer.stop();
+            stopMedia();
             finish();
         }
         super.onResume();
@@ -72,12 +77,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /*
-     * back button clicked
+     * Called when the back button is clicked
      */
     @Override
     public void onBackPressed() {
-        vibrator.cancel();
-        mediaPlayer.stop();
+        stopMedia();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /*
-     * set up the drawer menu and clicker
+     * Set up the drawer menu and clicker
      */
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
@@ -101,11 +105,10 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /*
-     *  When item in navigation bar is selected
+     *  Called when item in navigation bar is selected
      */
     public void selectDrawerItem(MenuItem menuItem) {
-        vibrator.cancel();
-        mediaPlayer.stop();
+        stopMedia();
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_result:
@@ -140,8 +143,16 @@ public class MainActivity extends AppCompatActivity{
     /*
      * When the activity stops, vibrate and sound stops.
      */
-    public void onStop(){
-        super.onStop();
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopMedia();
+    }
+
+    /*
+     * Called when the media is stopped.
+     */
+    public void stopMedia(){
         vibrator.cancel();
         mediaPlayer.stop();
     }

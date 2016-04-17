@@ -21,6 +21,9 @@ public class PSM {
         return null;
     }
 
+    /*
+     * The first grid
+     */
     public static int[] getGrid1() {
         int[] grid = new int[16];
 
@@ -44,6 +47,9 @@ public class PSM {
         return grid;
     }
 
+    /*
+     * the second grid
+     */
     public static int[] getGrid2() {
         int[] grid = new int[16];
 
@@ -67,6 +73,9 @@ public class PSM {
         return grid;
     }
 
+    /*
+     * the third grid
+     */
     public static int[] getGrid3() {
         int[] grid = new int[16];
 

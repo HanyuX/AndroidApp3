@@ -9,13 +9,17 @@ import android.content.Intent;
  */
 
 public class EMAAlarmReceiver extends BroadcastReceiver {
-    //Receive broadcast
+    /*
+     * Receive the broadcast
+     */
     @Override
     public void onReceive(final Context context, Intent intent) {
         startPSM(context);
     }
 
-    // start the stress meter
+     /*
+      * start the stress meter
+      */
     private void startPSM(Context context) {
         Intent emaIntent = new Intent(context, MainActivity.class); //The activity you  want to start.
         emaIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

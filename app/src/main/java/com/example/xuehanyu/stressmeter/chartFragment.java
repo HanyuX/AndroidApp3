@@ -1,32 +1,29 @@
 package com.example.xuehanyu.stressmeter;
 
-import android.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import de.codecrafters.tableview.toolkit.TableDataRowColorizers;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
-import android.graphics.Color;
-
-import de.codecrafters.tableview.TableView;
-import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
-import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
-import de.codecrafters.tableview.toolkit.TableDataRowColorizers;
-import java.io.InputStream;
 
 /**
  * Created by xuehanyu on 4/13/16.
@@ -41,7 +38,9 @@ public class chartFragment extends Fragment {
     List<PointValue> values = new ArrayList<>();        //data of chart
 
     @Override
-    /** called when the fragment is created */
+    /*
+     * called when the fragment is created
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
